@@ -445,64 +445,221 @@ struct PersonalityTraits {
 
 ## 📊 Bill of Materials (BOM)
 
-### Electronics Components
+### 💰 Cost-Optimized Budget Options
 
-| Category | Component | Quantity | Unit Price | Total | Supplier |
-|----------|-----------|----------|------------|-------|----------|
-| **MCU** | ESP32-WROOM-32D Dev Board | 1 | $8 | $8 | Generic |
-| **Servos** | MG996R Digital Servo | 6 | $12 | $72 | Generic |
-| **Servos** | SG90 Micro Servo | 12 | $3 | $36 | Generic |
-| **Driver** | PCA9685 16-Ch PWM Driver | 1 | $6 | $6 | Adafruit |
-| **Sensors** | HC-SR04 Ultrasonic | 4 | $2 | $8 | Generic |
-| **Sensors** | HC-SR501 PIR Motion | 2 | $3 | $6 | Generic |
-| **Sensors** | MPU-6050 IMU Module | 1 | $5 | $5 | Generic |
-| **Sensors** | TTP223 Touch Sensor | 8 | $1 | $8 | Generic |
-| **Sensors** | LDR Photoresistor | 2 | $0.50 | $1 | Generic |
-| **LEDs** | WS2812B LED Strip (1m) | 1 | $10 | $10 | Generic |
-| **Audio** | 8Ω 2W Speaker | 1 | $4 | $4 | Generic |
-| **Power** | 11.1V 5000mAh LiPo Battery | 1 | $45 | $45 | Hobbyking |
-| **Power** | TP4056 Charging Module | 1 | $2 | $2 | Generic |
-| **Power** | Buck Converter 5V/3A | 2 | $3 | $6 | Generic |
-| **Power** | Buck Converter 12V/5A | 1 | $8 | $8 | Generic |
-| **PCB** | Custom Control Board | 1 | $50 | $50 | PCB Fab House |
-| **Misc** | Wiring, Connectors, Hardware | - | - | $30 | Various |
-| | | | **Subtotal** | **$305** | |
+We offer **THREE BUILD TIERS** to match different budgets and goals:
 
-### Mechanical Components (Prototype)
+---
 
-| Category | Component | Quantity | Unit Price | Total | Production Method |
-|----------|-----------|----------|------------|-------|-------------------|
-| **Shell** | Main Body Segments (PLA) | 7 | $15 | $105 | 3D Printing |
-| **Shell** | Head Piece (PLA) | 1 | $20 | $20 | 3D Printing |
-| **Shell** | Tail Section (PLA) | 1 | $15 | $15 | 3D Printing |
-| **Hinges** | Custom 3D Printed Hinges | 6 | $3 | $18 | 3D Printing |
-| **Bearings** | 608ZZ Ball Bearings | 12 | $1.50 | $18 | Purchase |
-| **Frame** | Internal Support Structure | 1 | $25 | $25 | 3D Printing |
-| **Fasteners** | M3 Screws, Nuts (100pcs) | 1 | $10 | $10 | Purchase |
-| **Linkages** | Servo Linkage Arms | 12 | $2 | $24 | 3D Printing |
-| | | | **Subtotal** | **$235** | |
+### 🥉 **TIER 1: Minimal Functional Prototype** - $120-150
 
-### Mechanical Components (Final Production)
+Perfect for proof-of-concept and learning. Uses readily available parts.
 
-| Category | Component | Quantity | Unit Price | Total | Production Method |
-|----------|-----------|----------|------------|-------|-------------------|
-| **Shell** | AL6061 Shell Segments | 7 | $80 | $560 | CNC Machining |
-| **Shell** | Aluminum Head Piece | 1 | $120 | $120 | CNC Machining |
-| **Hinges** | Custom Machined Pivots | 6 | $25 | $150 | CNC Machining |
-| **Frame** | Aluminum Frame Structure | 1 | $150 | $150 | CNC Machining |
-| **Bearings** | Sealed 608ZZ Bearings | 12 | $3 | $36 | Purchase |
-| **Fasteners** | M4 Stainless Hardware | 1 | $30 | $30 | Purchase |
-| **Surface** | Anodizing/Finishing | - | - | $200 | Professional Service |
-| | | | **Subtotal** | **$1,246** | |
+| Category | Component | Qty | Unit Price | Total | Where to Buy |
+|----------|-----------|-----|------------|-------|--------------|
+| **MCU** | ESP32 Dev Board (clone) | 1 | $4 | $4 | AliExpress/Amazon |
+| **Servos** | SG90 9g Micro Servo | 4 | $2 | $8 | Generic (bulk) |
+| **Sensors** | HC-SR04 Ultrasonic | 2 | $1 | $2 | Generic (bulk) |
+| **Sensors** | Basic Touch Sensors | 4 | $0.50 | $2 | DIY (aluminum foil) |
+| **LEDs** | WS2812B Strip (50cm) | 1 | $5 | $5 | Generic |
+| **Power** | 18650 Battery + Holder | 2 | $3 | $6 | Salvage/Generic |
+| **Power** | USB Charging Module | 1 | $1 | $1 | Generic |
+| **Power** | Mini Buck Converter | 1 | $2 | $2 | Generic |
+| **Shell** | PLA Filament (1kg) | 0.5 | $20 | $10 | Local/Online |
+| **Frame** | Cardboard/Foam Core | - | - | $5 | Craft Store |
+| **Fasteners** | M3 Screws Mix (50pcs) | 1 | $5 | $5 | Hardware Store |
+| **Wiring** | Jumper Wires, Connectors | - | - | $8 | Generic |
+| **Misc** | Glue, Tape, Small Parts | - | - | $10 | Various |
+| | | | **TOTAL** | **$68** | |
+| | | | **+Contingency (20%)** | **$82** | |
 
-### Project Total Costs
+**What you get:** Basic rolling mechanism, simple threat detection, LED feedback, battery-powered operation.
 
-| Phase | Cost | Notes |
-|-------|------|-------|
-| Prototype (Current) | $540 | Working proof of concept |
-| Production Model | $1,551 | Exhibition-quality finish |
-| Development Tools | $200 | Software licenses, test equipment |
-| **Total Investment** | **$2,291** | For complete production unit |
+---
+
+### 🥈 **TIER 2: Full-Featured Prototype** - $200-280 (RECOMMENDED)
+
+Complete functionality with all sensors and professional appearance.
+
+| Category | Component | Qty | Unit Price | Total | Where to Buy |
+|----------|-----------|-----|------------|-------|--------------|
+| **MCU** | ESP32-WROOM-32D (genuine) | 1 | $6 | $6 | Authorized Distributor |
+| **Servos** | MG90S Metal Gear Servo | 5 | $5 | $25 | HobbyKing/Generic |
+| **Servos** | SG90 Micro Servo | 4 | $2 | $8 | Generic |
+| **Driver** | PCA9685 PWM Driver Board | 1 | $4 | $4 | Generic Module |
+| **Sensors** | HC-SR04 Ultrasonic | 3 | $1.50 | $4.50 | Generic |
+| **Sensors** | HC-SR501 PIR Motion | 1 | $2 | $2 | Generic |
+| **Sensors** | MPU-6050 IMU (GY-521) | 1 | $3 | $3 | Generic |
+| **Sensors** | TTP223 Touch Module | 6 | $0.80 | $4.80 | Generic (bulk) |
+| **Sensors** | LDR Photoresistor | 2 | $0.30 | $0.60 | Generic |
+| **LEDs** | WS2812B Strip (1m/60LED) | 1 | $8 | $8 | Generic |
+| **Audio** | Small Speaker (8Ω 1W) | 1 | $2 | $2 | Generic |
+| **Audio** | PAM8403 Amplifier Module | 1 | $1 | $1 | Generic |
+| **Power** | 11.1V 2200mAh LiPo 3S | 1 | $18 | $18 | Hobbyking |
+| **Power** | TP4056 Charge Module | 1 | $1 | $1 | Generic |
+| **Power** | LM2596 Buck (5V/3A) | 1 | $2 | $2 | Generic |
+| **Power** | LM2596 Buck (6V/3A) | 1 | $2 | $2 | Generic |
+| **Shell** | PETG Filament (1kg) | 0.8 | $25 | $20 | Quality Brand |
+| **Hinges** | Small Metal Hinges | 6 | $1 | $6 | Hardware Store |
+| **Bearings** | 608ZZ Bearings | 8 | $0.80 | $6.40 | Skateboard/Generic |
+| **Frame** | Aluminum Strips/Angle | - | - | $15 | Hardware Store |
+| **PCB** | Prototype PCB / Perfboard | 1 | $3 | $3 | Generic |
+| **Fasteners** | M3 Hardware Kit (200pc) | 1 | $8 | $8 | Amazon/Local |
+| **Wiring** | Silicone Wire, JST Connectors | - | - | $12 | Generic |
+| **Finishing** | Spray Paint, Primer | - | - | $15 | Hardware Store |
+| **Misc** | Heat Shrink, Zip Ties, Glue | - | - | $10 | Various |
+| | | | **SUBTOTAL** | **$177** | |
+| | | | **+Contingency (25%)** | **$221** | |
+
+**What you get:** Full sensor suite, smooth morphing, WiFi control, professional finish, 2+ hour runtime, durable construction.
+
+---
+
+### 🥇 **TIER 3: Exhibition/Production Quality** - $450-600
+
+Museum-grade with enhanced durability and premium aesthetics.
+
+| Category | Component | Qty | Unit Price | Total | Production Method |
+|----------|-----------|-----|------------|-------|-------------------|
+| **All Tier 2 Electronics** | (Same as above) | - | - | $177 | - |
+| **Servos Upgrade** | MG996R Metal Gear (replace MG90S) | 5 | $10 | $50 | Better torque |
+| **Shell** | Laser-Cut Aluminum Sheet (2mm) | 1 | $80 | $80 | Local CNC Shop |
+| **Shell Alt** | Vacuum-Formed ABS (DIY) | 1 | $40 | $40 | DIY with mold |
+| **Frame** | Aluminum Extrusion Profile | 2m | $8/m | $16 | Hardware Store |
+| **Hinges** | Precision Brass Hinges | 6 | $5 | $30 | Model/Hobby Shop |
+| **Bearings** | Shielded Precision 608-2RS | 8 | $2 | $16 | Bearing Supplier |
+| **PCB** | Custom 2-Layer PCB (5pcs) | 1 | $15 | $15 | JLCPCB/PCBWay |
+| **Surface** | Automotive Primer + Paint | - | - | $35 | Auto Parts Store |
+| **Surface** | Clear Coat (2K if metal) | - | - | $25 | Auto Parts Store |
+| **Fasteners** | Stainless Steel Hardware | - | - | $20 | McMaster-Carr |
+| **Misc** | Professional Finishing | - | - | $30 | Various |
+| | | | **SUBTOTAL** | **$494** | |
+| | | | **+Contingency (15%)** | **$568** | |
+
+**What you get:** Exhibition-ready, metal construction option, professional PCB, superior durability, premium finish.
+
+---
+
+### 💡 **Cost Reduction Strategies**
+
+#### Smart Shopping Tips
+- **Bulk Buying**: Order 10-pack servos/sensors (50-70% savings per unit)
+- **Kit Deals**: ESP32 starter kits often include sensors
+- **Salvage**: Harvest bearings from old skateboards/toys
+- **Free Materials**: 
+  - Cardboard for internal structure
+  - Old credit cards for structural reinforcement
+  - Bottle caps as linkage joints
+  
+#### Alternative Sources
+- **AliExpress**: 60-80% cheaper, 2-4 week shipping
+- **Local Electronics Markets**: Bargain prices, instant pickup
+- **University Surplus**: Salvage motors, sensors, hardware
+- **Recycling Centers**: Free metal scraps, components
+
+#### DIY Substitutions
+- **Skip Custom PCB**: Use perfboard + wire wrapping ($3 vs $50)
+- **Cardboard Frame**: Strong enough for prototype, free
+- **PLA Instead of PETG**: Adequate for testing ($15/kg vs $25/kg)
+- **Fewer Servos Initially**: Start with 3-4, expand later
+- **Single Ultrasonic**: One sensor front-facing only
+- **Skip IMU**: Use only distance/touch for MVP
+- **Paper/Cardboard Shell**: Paint it well, looks surprisingly good!
+
+#### Phased Building Approach
+```
+Week 1: Core electronics + basic movement         $50
+Week 2: Add sensors + decision logic              $30
+Week 3: Build shell structure                     $25
+Week 4: Finishing, painting, tuning               $20
+------------------------------------------------------
+TOTAL: $125 spread over 4 weeks
+```
+
+---
+
+### 🛠️ **Recommended Starting Configuration**
+
+**Best Value Build - $150 Total**
+
+This configuration provides excellent functionality without breaking the bank:
+
+| Component | Spec | Price | Rationale |
+|-----------|------|-------|-----------|
+| ESP32 | Generic Dev Board | $5 | Sufficient for all features |
+| Servos (Rolling) | 4× MG90S Metal Gear | $20 | Reliable, good torque |
+| Servos (Legs) | 6× SG90 Plastic | $12 | Adequate for legs |
+| Sensors | 2× Ultrasonic, 4× Touch | $6 | Essential sensing |
+| IMU | MPU-6050 Module | $3 | Orientation awareness |
+| LEDs | WS2812B 50cm Strip | $5 | Visual feedback |
+| Power | 2× 18650 + Holder + Charger | $15 | Rechargeable, safe |
+| Buck Converter | 2× LM2596 Module | $4 | Stable power rails |
+| Structure | PETG Filament 500g | $15 | Strong, printable |
+| Frame | Aluminum strips | $12 | Lightweight support |
+| Hardware | M3 Screws, Bearings | $15 | Assembly essentials |
+| Wiring | Jumpers, Connectors | $10 | Connectivity |
+| Finishing | Primer + Spray Paint | $12 | Professional look |
+| Contingency | Unexpected needs | $16 | Buffer for errors |
+| **TOTAL** | | **$150** | Complete functional robot |
+
+---
+
+### 📦 **Where to Source Components**
+
+#### International (Best Prices)
+- **AliExpress**: Electronics, servos, sensors (2-4 weeks)
+- **Banggood**: Hobby parts, batteries
+- **LCSC**: Electronic components (CN/global)
+
+#### USA/Fast Shipping
+- **Amazon**: Quick delivery, easy returns
+- **Adafruit**: Quality modules, tutorials
+- **SparkFun**: Educational kits
+- **HobbyKing**: RC parts, batteries (warehouse dependent)
+- **Mouser/Digikey**: Professional components
+
+#### Local Options (Japan)
+- **Akihabara Markets**: Bargain electronics
+- **Tokyu Hands**: Craft/build materials
+- **Home Centers**: Hardware, tools
+- **Marutsu/Akizuki**: Electronic parts shops
+- **Hard-Off**: Salvage parts, used gear
+
+#### Filament & 3D Printing
+- **eSun**: Budget PETG/PLA ($18-25/kg)
+- **Polymaker**: Premium quality
+- **Reprapper Tech**: Maker-focused
+- **Local Library/Makerspace**: Print for $0.10-0.30/gram
+
+---
+
+### 🎯 **Recommended Purchase Plan**
+
+#### Phase 1: Immediate Order ($80)
+Order from AliExpress (long shipping time):
+- ESP32 + sensor kit bundle
+- Servo multipack (10pcs)
+- WS2812B LED strip
+- Buck converters, modules
+- Touch sensors
+- Bearings
+
+#### Phase 2: Local Purchase ($40)
+Buy locally while waiting for shipping:
+- PETG filament (start printing!)
+- Aluminum strips/angle
+- M3 hardware kit
+- Spray paint, primer
+- Wire, connectors
+
+#### Phase 3: Final Components ($30)
+Once design validated:
+- LiPo battery (local RC shop)
+- Any missing sensors
+- Replacement servos if needed
+- Finishing materials
+
+**Total Timeline**: 3-4 weeks from order to completion
 
 ---
 

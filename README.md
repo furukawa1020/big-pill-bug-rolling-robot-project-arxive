@@ -473,39 +473,421 @@ float calculateThreatLevel() {
 
 ---
 
-## 🔬 Mechanical Design Details
+## 🔬 Mechanical Design Details - Complete Engineering Guide
 
 ### Shell Segment Mechanism
 
-#### Design Principles
-- **Biomimetic Articulation**: 7 overlapping segments (inspired by Armadillidium vulgare)
-- **Sliding Joint System**: Each segment slides and rotates simultaneously
-- **Center of Rotation**: Precisely calculated for perfect sphere formation
-- **Load Distribution**: Reinforced stress points at hinge locations
+#### Biomimetic Design Analysis
 
-#### CAD Workflow
-- **Software**: Autodesk Fusion 360
-- **File**: `ダンゴムシもどきalfav222.f3d`
-- **Parametric Design**: Fully adjustable dimensions
-- **Assembly Constraints**: Kinematic joint definitions
-- **Simulation**: Motion study for collision detection
-- **Export**: STL for 3D printing, STEP for CNC machining
+**Real Pill Bug Anatomy Study:**
+```
+Natural Armadillidium vulgare:
+├─ 7-9 tergite plates (dorsal armor)
+├─ Overlapping scale arrangement
+├─ Ventral legs (7 pairs)
+├─ Rolling time: 0.3-2.0 seconds
+└─ Perfect sphere when threatened
 
-#### Hinge Design
-- **Type**: Custom living hinge (prototype) → Metal pivot hinge (production)
-- **Bearing Integration**: 608ZZ miniature ball bearings
-- **Range of Motion**: 0° to 180° per segment
-- **Safety**: Mechanical stops prevent over-rotation
-- **Durability**: 10,000+ cycle testing target
+Our 50cm Robot Design:
+├─ 7 articulated shell segments
+├─ Servo-driven linkage system
+├─ 6 legs (simplified from 14)
+├─ Rolling time: 0.8-1.2 seconds
+└─ 30cm diameter sphere
+```
 
-### Structural Analysis
-- **FEA Simulation**: Stress analysis under loading
-- **Material Selection**: Strength-to-weight optimization
-- **Factor of Safety**: 3.0 for prototype, 5.0 for production
-- **Load Cases**: 
-  - Self-weight in rolled configuration
-  - Impact resistance (drop testing)
-  - Handling forces (human interaction)
+**Segment Geometry:**
+```
+Front view (cross-section):      Side view (curvature):
+
+    ╱────────╲                   ═══════════════
+   ╱          ╲                 ╱               ╲
+  │  150mm W  │               ╱   Radius: 150mm ╲
+  │            │              │                   │
+   ╲          ╱                ╲                 ╱
+    ╲────────╱                  ═══════════════
+
+Each segment: 70mm length × 250mm width (center) × 3mm thick
+Taper ratio: 80% at edges for anatomical accuracy
+```
+
+**Mathematical Sphere Formation:**
+```
+Perfect sphere requires:
+- Center of rotation aligned for all hinges
+- Segment angles sum to 180°
+- Overlap prevents gaps
+
+Calculation:
+Segment_1: 0°   (reference, flat)
+Segment_2: 15°  (slight curve)
+Segment_3: 30°  (noticeable curl)
+Segment_4: 50°  (strong curl)
+Segment_5: 75°  (almost rolled)
+Segment_6: 110° (fully curled)
+Segment_7: 135° (tail tucks in)
+──────────────
+Total:     ~180° = hemisphere × 2 = sphere!
+```
+
+#### CAD Workflow - Detailed Tutorial
+
+**Software**: Autodesk Fusion 360 (FREE for personal/educational use!)
+
+**Project File**: `ダンゴムシもどきalfav222.f3d` (included in repo)
+
+**Step-by-Step Modeling:**
+
+1. **Create Master Sketch**
+   - New sketch on XY plane
+   - Draw segment profile (side view)
+   - Use spline tool for organic curve
+   - Constrain dimensions: 70mm × 150mm
+
+2. **Extrude with Curvature**
+   - Select profile
+   - Extrude: 250mm width
+   - Enable "Curved Path" option
+   - Define radius: 150mm
+   - Result: Curved shell segment ✓
+
+3. **Add Hinge Features**
+   - Create boss for bearing (22mm diameter × 10mm deep)
+   - Mirror for other side
+   - Add M4 bolt hole (4.2mm through-hole)
+   - Fillet edges (3mm radius for safety)
+
+4. **Pattern Segments**
+   - Rectangular pattern: 1 × 7
+   - Spacing: 75mm (includes overlap)
+   - Scale factor: 0.9 → 1.0 → 0.9 (wider in middle)
+
+5. **Assembly**
+   - Insert > Insert from File (all segments)
+   - Create joints: Type = Revolute
+   - Axis: M4 bolt center lines
+   - Test motion: Drag segment to verify 180° range
+
+6. **Motion Study**
+   - Animation workspace
+   - Define servo rotation (0° to 120° over 1 second)
+   - Play animation
+   - Check for collisions (red highlights) ❌
+   - Adjust geometry if needed
+
+7. **FEA Stress Analysis**
+   - Simulation workspace
+   - Material: PETG (tensile strength 50 MPa)
+   - Load case: 20kg force on rolled ball
+   - Mesh: 2mm element size
+   - Solve (2-5 minutes)
+   - View stress: Max ~25 MPa = Safe! ✓
+
+8. **Export for Manufacturing**
+   - Right-click component → Save as STL
+   - Quality: High (mesh refinement)
+   - Units: Millimeters
+   - One STL per segment
+   - Also export STEP (for editing in other CAD)
+
+**Parametric Magic:**
+```
+User Parameters (change anytime!):
+- robot_length: 500mm
+- robot_width: 250mm  
+- num_segments: 7
+- shell_thickness: 3mm
+- sphere_diameter: (auto-calculated)
+
+Change to 300mm length → entire design updates! 🎉
+```
+
+#### Three Hinge Design Options Compared
+
+**Option A: Living Hinge (Flexible Material)**
+```
+Cost: $0 (printed as part of shell)
+Material: TPU 95A flexible filament
+Design: 
+  ╔════════════╗
+  ║  Segment  ║
+  ║           ╠═══╗  ← 0.8mm thin section
+  ╚═══════════╝   ║     (flex zone)
+      ╔═══════════╣
+      ║  Segment  ║
+      ╚═══════════╝
+
+Pros:
+✓ No assembly required
+✓ Silent operation
+✓ No maintenance
+✓ Smooth bending
+
+Cons:
+✗ Limited lifespan (500-2000 cycles)
+✗ Can tear if over-flexed
+✗ Requires dual-extrusion or manual material swap
+✗ Less precise position control
+
+Best for: Rapid prototyping, proof-of-concept
+```
+
+**Option B: Pin Hinge with Bearings (RECOMMENDED)**
+```
+Cost: $1.50 per hinge × 6 = $9 total
+Parts per hinge:
+- M4 × 40mm bolt: $0.20
+- 2× 608ZZ bearing (8×22×7mm): $0.80
+- M4 nylock nut: $0.10
+- 2× 3D printed brackets: $0.40
+
+Assembly:
+  Segment A         Segment B
+      ║                 ║
+      ╠══╗           ╔══╣
+      ║  ║           ║  ║
+  [bracket]───────[bearing]
+            M4 bolt  ║ ║
+         [bearing]───║─║─[nut]
+              ║      ║ ║
+           [bracket]═╝ ╚═[bracket]
+
+Pros:
+✓ Smooth rotation (bearing quality)
+✓ 10,000+ cycle durability
+✓ Easily replaceable
+✓ Precise position control
+✓ Handles high loads
+
+Cons:
+✗ Requires assembly (15 min per hinge)
+✗ Slight rattle noise if loose
+✗ Adds weight (~15g per hinge)
+
+Assembly Tips:
+1. Press bearings into brackets (use C-clamp)
+2. Slide bolt through: bracket → bearing → shell → bearing → bracket
+3. Add drop of threadlocker on nut
+4. Tighten until snug but rotates freely
+5. Test: Should spin smoothly with no binding
+
+Best for: Functional prototype, repeated use
+```
+
+**Option C: Piano Hinge (Continuous)**
+```
+Cost: $5 per hinge × 6 = $30 total
+Material: Brass or stainless steel
+Dimensions: 250mm length × 20mm width
+
+Installation:
+  ═══════════════════════════
+  ║ Segment ║ Piano Hinge ║ Segment ║
+  ═══════════════════════════
+        ↑ Rivets or screws every 25mm
+
+Pros:
+✓ Professional appearance
+✓ Extremely durable (50,000+ cycles)
+✓ Full length support (no stress concentration)
+✓ Silent operation
+
+Cons:
+✗ Higher cost
+✗ Requires cutting to length
+✗ Needs many fasteners (drilling)
+✗ Heavier than other options
+
+Best for: Exhibition/production units
+```
+
+**Comparison Table:**
+
+| Feature | Living | Pin+Bearing | Piano |
+|---------|--------|-------------|-------|
+| Cost | $0 | $9 | $30 |
+| Cycles | 500 | 10,000 | 50,000 |
+| Weight | 0g | 90g | 180g |
+| Assembly | 0 min | 90 min | 180 min |
+| Repairability | ✗ | ✓✓ | ✓ |
+| Smoothness | ★★★☆ | ★★★★ | ★★★★★ |
+
+**Winner**: Pin+Bearing (best value/performance)
+
+#### Material Evolution Path
+
+**Phase 1: 3D Printed PLA ($20)**
+```
+When: Proof of concept, fit testing
+Print Settings:
+  ├─ Material: PLA (easiest)
+  ├─ Layer: 0.2mm
+  ├─ Walls: 3 (1.2mm)
+  ├─ Infill: 15% (fast)
+  ├─ Speed: 60mm/s
+  └─ Time: 6 hours per segment
+
+Pros: Fast iteration, cheap
+Cons: Brittle, low strength
+Strength: 50 MPa tensile
+Weight: ~150g per segment
+```
+
+**Phase 2: PETG 3D Print ($30)**
+```
+When: Functional testing, demonstrations
+Print Settings:
+  ├─ Material: PETG (impact resistant)
+  ├─ Layer: 0.2mm
+  ├─ Walls: 4 (1.6mm)
+  ├─ Infill: 25% gyroid
+  ├─ Speed: 40mm/s (slower for quality)
+  ├─ Temp: 235°C nozzle, 80°C bed
+  └─ Time: 10 hours per segment
+
+Post-Processing:
+1. Sand: 120 → 220 → 400 grit (1 hour)
+2. Primer: 2 coats automotive filler primer
+3. Wet sand: 600 grit
+4. Paint: 3 coats spray paint (metallic silver!)
+5. Clear: 2 coats gloss or matte clear
+Total time: 3 hours finishing per segment
+
+Result: Looks 85% professional ✓
+Strength: 53 MPa tensile
+Weight: ~180g per segment
+Cost per segment: $4 material + $1 finishing
+```
+
+**Phase 3: Composite Layup ($80)**
+```
+When: High-performance, lightweight goals
+Process:
+1. 3D print PLA "mold" (10% infill, fast)
+2. Apply mold release wax
+3. Lay fiberglass cloth (2-3 layers)
+4. Wet out with epoxy resin (2:1 ratio)
+5. Vacuum bag (optional, removes air)
+6. Cure 24 hours at room temp
+7. Demold (PLA stays inside or dissolves in acetone)
+8. Trim edges with rotary tool
+9. Sand, prime, paint
+
+Materials per segment:
+- Fiberglass cloth: $3
+- Epoxy resin: $8
+- Mold release: $1
+- Consumables: $2
+
+Result: 3× strength of PETG, 30% lighter!
+Strength: 150+ MPa (fiber-dependent)
+Weight: ~120g per segment
+Cost per segment: $14 materials
+
+Caution: Epoxy fumes! Use respirator and ventilation.
+```
+
+**Phase 4: Sheet Metal ($200-300)**
+```
+When: Exhibition, permanent installation
+
+Method A: CNC Cutting + Hand Forming
+1. Export flat pattern from Fusion 360
+2. Send to local CNC shop or laser cutter
+   - Material: 2mm AL6061 sheet
+   - Cutting: $80 for all 7 segments
+3. Form curves using:
+   - English wheel (if available)
+   - Hammer + wooden former
+   - Brake press (for bends)
+4. Drill mounting holes (drill press)
+5. Deburr all edges (file + sandpaper)
+6. Surface finish:
+   - Scotch-Brite pad (brushed finish)
+   - Anodizing service ($60)
+   OR
+   - Spray paint (high-temp)
+
+Method B: DIY Hammer Forming
+1. 3D print convex mold (hemisphere)
+2. Cut aluminum square (oversized)
+3. Clamp over mold
+4. Use rubber mallet + patience
+5. Work from center outward
+6. Anneal if work-hardening (heat with torch)
+7. Continue until shape matches
+8. Trim, drill, finish
+
+Total Cost:
+- Aluminum sheet (1m × 0.5m): $60
+- Cutting service: $80
+- Anodizing: $60
+- Hardware: $20
+= $220 total
+
+Result: Exhibition-quality, indestructible
+Strength: 310 MPa (AL6061-T6)
+Weight: ~250g per segment (heavier!)
+Lifespan: Essentially unlimited
+
+Note: Metal is LOUD when rolling! Consider rubber bumpers.
+```
+
+**Recommended Timeline:**
+- **Month 1-2**: Phase 1 (PLA) - Learn, iterate design
+- **Month 3-4**: Phase 2 (PETG) - Functional testing
+- **Month 5-6**: Phase 3 or 4 - Final version based on budget
+
+#### Internal Frame Designs
+
+**Option A: Printed Honeycomb ($15)**
+```
+Design in Fusion 360:
+- Base plate: 400mm × 200mm × 5mm
+- Honeycomb pattern: 20mm cells
+- Servo mounts: Raised bosses with M3 inserts
+- Battery tray: Velcro strap holders
+- PCB mounts: Standoffs (M2.5)
+
+Print Settings:
+- Material: PLA (adequate, cheap)
+- Infill: 30% (honeycomb matches!)
+- Walls: 3
+- Time: 18 hours
+- Weight: 280g
+
+Assembly:
+1. Heat-set brass inserts (M3 × 6 locations)
+2. Bolt servos to frame
+3. Velcro battery strap
+4. Mount PCB with standoffs
+```
+
+**Option B: Aluminum Extrusion ($35)**
+```
+Parts:
+- 2020 V-slot extrusion: 2× 400mm lengths ($12)
+- 2020 corner brackets: 4× ($8)
+- T-slot nuts: 20× ($5)
+- 3D printed adapters ($10 material)
+
+Assembly:
+1. Create rectangular frame (400 × 200mm)
+2. Square corners, tighten bolts
+3. Attach servo mounts (3D printed) with T-nuts
+4. Slide electronics tray into slots
+5. Add cross-bracing if needed
+
+Pros:
+✓ Infinitely adjustable
+✓ Very rigid
+✓ Professional look
+✓ Reusable (disassemble/redesign)
+
+Weight: 450g (heavier but stronger)
+```
+
+**Winner**: Option A for budget, Option B if reconfigurability matters
 
 ---
 

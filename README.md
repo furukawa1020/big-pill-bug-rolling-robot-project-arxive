@@ -134,22 +134,178 @@ This project builds upon cutting-edge research in bio-inspired robotics:
 
 ### Actuation System
 
-#### Rolling/Morphing Mechanism
-- **Main Actuators**: 4-6x MG996R Digital Servo Motors
-  - Operating Voltage: 4.8V-7.2V
-  - Torque: 11 kg·cm @ 6V
-  - Speed: 0.17 sec/60° @ 6V
-  - Metal gear construction for durability
-  - PWM control via ESP32
-  
-- **Segment Linkage**: Custom 3D-printed mechanical linkages with ball bearings
-- **Coordination**: Synchronized servo movement via software state machine
-- **Rolling Time**: Target 0.5-1.0 seconds (threat to sphere)
+#### Rolling/Morphing Mechanism - Detailed Design
 
-#### Locomotion System (Future Implementation)
-- **Leg Motors**: 12x SG90 Micro Servos (6 legs × 2 joints)
-- **Gait Control**: Tripod gait algorithm
-- **Walking Speed**: 5-10 cm/s
+**Servo Selection Guide:**
+
+| Model | Torque | Speed | Weight | Price | Best Use Case |
+|-------|--------|-------|--------|-------|---------------|
+| **SG90** | 1.8 kg·cm | 0.12s/60° | 9g | $2 | Legs, small linkages |
+| **MG90S** | 2.2 kg·cm | 0.10s/60° | 13g | $5 | Shell segments (budget) |
+| **MG995** | 10 kg·cm | 0.20s/60° | 55g | $8 | Main rolling (good) |
+| **MG996R** | 11 kg·cm | 0.17s/60° | 55g | $12 | Main rolling (premium) |
+
+**Recommended Configuration:**
+- **Budget Build**: 4× MG90S (shell) + 4× SG90 (legs) = $28
+- **Standard Build**: 5× MG995 (shell) + 6× SG90 (legs) = $52
+- **Premium Build**: 6× MG996R (shell) + 12× SG90 (legs) = $96
+
+#### Mechanical Linkage System
+
+**Rolling Mechanism Explained:**
+
+The key innovation is a **4-bar linkage system** connecting each shell segment:
+
+```
+         ┌─────────────────┐ Segment 1 (Fixed to Body)
+         │                 │
+    Servo├──●──┐       ┌──●── Pivot Point
+         │     │       │  │
+         └─────┼───────┼──┘
+               │       │
+            Link Arm   │
+               │       │
+         ┌─────┼───────┼──┐ Segment 2 (Moving)
+         │     └───────┘  │
+    Servo├──●              │
+         │                 │
+         └─────────────────┘
+```
+
+**How It Works:**
+1. Servo rotates 0° to 120°
+2. Link arm pushes/pulls adjacent segment
+3. All segments synchronized = smooth curl
+4. Complete roll in 0.8-1.2 seconds
+5. Lock position holds sphere shape
+
+**Critical Dimensions (for 50cm robot):**
+- Link arm length: 35mm
+- Pivot spacing: 60mm
+- Servo mounting offset: 15mm from pivot
+- Segment overlap: 10mm (rolled position)
+- Clear radius in sphere: 240mm diameter
+
+**Materials:**
+- **Link Arms**: 
+  - Prototype: 3D printed PETG (2mm thick)
+  - Production: Laser-cut acrylic (3mm) or aluminum (2mm)
+- **Pivot Points**: 
+  - M4 bolts through 608ZZ bearings
+  - Low-friction rotation
+  - Replaceable if worn
+
+#### Servo Control Details
+
+**PWM Signal Specifications:**
+```cpp
+// ESP32 Servo Control
+#define SERVO_MIN_PULSE 500   // 0° position (microseconds)
+#define SERVO_MAX_PULSE 2500  // 180° position
+#define SERVO_FREQUENCY 50    // 50 Hz standard PWM
+
+// Rolling Position Mapping
+int rollPositions[6] = {
+    0,    // Segment 1: Extended (0°)
+    20,   // Segment 2: Slight curl (20°)
+    45,   // Segment 3: Medium curl (45°)
+    80,   // Segment 4: Strong curl (80°)
+    110,  // Segment 5: Full curl (110°)
+    120   // Segment 6: Sphere complete (120°)
+};
+```
+
+**Coordinated Movement Timing:**
+- **Sequential Rolling**: 0.15s delay between each segment (smoother)
+- **Simultaneous Rolling**: All at once (faster, 0.8s total)
+- **Wave Rolling**: Front-to-back wave effect (dramatic, 1.5s)
+
+**Power Requirements:**
+- Idle current: 10-20mA per servo
+- Active movement: 200-500mA per servo
+- Stall current (blocked): 1000-2000mA (avoid!)
+- Peak power (all moving): 2-3A total
+- **Solution**: Stagger movements to reduce peak load
+
+#### Locomotion System (Advanced Feature)
+
+**Leg Configuration:**
+- **Design**: 6 legs, insect-like (biomimetic)
+- **Joints per Leg**: 
+  - Coxa (hip): 1 servo for forward/back swing
+  - Femur (thigh): 1 servo for up/down lift
+  - Tibia (shin): Fixed or optional 3rd servo
+  
+**Gait Algorithm:**
+```
+Tripod Gait (most stable):
+- Group A: Legs 1, 3, 5 (left-front, right-middle, left-rear)
+- Group B: Legs 2, 4, 6 (right-front, left-middle, right-rear)
+
+Step Sequence:
+1. Group A lifts, Group B supports
+2. Group A swings forward
+3. Group A lowers, Group B lifts
+4. Group B swings forward
+5. Repeat
+
+Walking Speed: 5-10 cm/s
+Turn Radius: 30cm minimum
+```
+
+**Simplified Budget Version:**
+- **4 legs instead of 6**: Still stable, saves $16
+- **1 servo per leg**: Forward/back only, no lift
+- **Drag-walking**: Legs push, body drags (simpler control)
+- **Static Pose**: Start with non-walking version, add later!
+
+#### Servo Wiring Optimization
+
+**Problem**: 10+ servos = messy wiring!
+
+**Solution 1: PCA9685 PWM Driver** (Recommended)
+```
+ESP32 ──I2C──> PCA9685 ──┬──> Servo 1
+                         ├──> Servo 2
+                         ├──> Servo 3
+                         └──> ... Servo 16
+
+Benefits:
+- Only 2 wires from ESP32 (SDA, SCL)
+- 16 servo outputs
+- Hardware PWM (no jitter)
+- Stackable (up to 62 boards!)
+Cost: $4
+```
+
+**Solution 2: Direct ESP32 Control** (Budget)
+```
+ESP32 GPIO ──┬──> Servo 1 (Pin 13)
+             ├──> Servo 2 (Pin 12)
+             ├──> Servo 3 (Pin 14)
+             └──> ... (use 10+ GPIO)
+
+Benefits:
+- No extra hardware
+- Simple code
+Limitations:
+- Uses many GPIO pins
+- Software PWM (potential jitter)
+Cost: $0
+```
+
+**Power Distribution:**
+```
+Battery ──> Buck ──> Servo Rail (6V/3A) ──┬──> Servo 1
+            (6V)                           ├──> Servo 2
+                                          └──> All Servos
+         
+         ──> Buck ──> Logic Rail (5V/1A) ──┬──> ESP32
+            (5V)                           ├──> Sensors
+                                          └──> LEDs
+
+CRITICAL: Common ground! Connect all GND together.
+```
 
 ### Sensor Array
 
